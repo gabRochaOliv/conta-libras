@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
-
-// Dart é a linguagem de programação, enquanto o Flutter é o framework 
-// que utiliza Dart para criar interfaces de usuário multiplataforma. 
-
-// https://javiercbk.github.io/json_to_dart/ --- JSON to Dart
+import 'package:video_player/video_player.dart';
+import 'AtivoPage.dart';
+import 'SecondPage.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-//StatelessWidget é onde faz os desenhos na tela - só elemtentos visuais - sem ter interação
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(  //importante - sempre retornar um MaterialApp
+    return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 0, 90, 245)),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Contabilidade - Conta Libras'),
+      home: const MyHomePage(title: ''),
     );
   }
 }
 
-//StatefulWidget serve para criar os estados - botões
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
@@ -38,36 +35,96 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  late VideoPlayerController _controller;
+  late Future<void> _initializeVideoPlayerFuture;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.asset(
+      'assets/bemvindo.mp4',
+    );
+
+    _initializeVideoPlayerFuture = _controller.initialize();
+    _controller.setLooping(true);
+    _controller.play();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( //serve para fazer a página
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize:
+            Size.fromHeight(40), // Defina uma altura menor para a AppBar
+        child: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+        ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Stack(
+          alignment: Alignment.center,
           children: <Widget>[
-          
-      
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SecondPage()),
-                );
+            FutureBuilder(
+              future: _initializeVideoPlayerFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
+                  );
+                } else {
+                  return CircularProgressIndicator();
+                }
               },
-              child: Text('Próxima Página'),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Image.asset(
+                  'assets/logo.png',
+                  height: 200,
+                ),
+                const SizedBox(height: 300),
+                Text(
+                  'Bem vindo(a) ',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                const SizedBox(height: 50),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SecondPage(),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.all(20.0),
+                    minimumSize: Size(350, 30),
+                    backgroundColor: const Color.fromARGB(255, 72, 72, 72),
+                  ),
+                  child: Text('Acessar Glossário',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w400,
+                      ) // Cor do texto dentro do botão),
+                      ),
+                ),
+              ],
             ),
           ],
         ),
@@ -75,26 +132,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-class SecondPage extends StatelessWidget {
-  const SecondPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Contabilidade - Conta Libras'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('Segunda página'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-//"stl" cria um StatelessWidget

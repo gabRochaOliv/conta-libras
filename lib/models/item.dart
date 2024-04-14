@@ -1,5 +1,5 @@
-//a partir do: https://javiercbk.github.io/json_to_dart/ 
-//gerei todo o código abaixo 
+//a partir do: https://javiercbk.github.io/json_to_dart/
+//gerei todo o código abaixo
 
 class Item {
   String? title;
