@@ -13,7 +13,7 @@ class _BalancoContabilPageState extends State<BalancoContabilPage>
   late TabController _tabController;
   late List<Widget> _tabContents;
 
-  VideoPlayerController? _videoController;
+  late VideoPlayerController _videoController;
   Future<void>? _initializeVideoPlayerFuture;
 
   @override
@@ -26,15 +26,14 @@ class _BalancoContabilPageState extends State<BalancoContabilPage>
       Center(child: Text('Conteúdo da Tab 2')),
       Center(child: Text('Conteúdo da Tab 3')),
     ];
+    _videoController = VideoPlayerController.asset(
+      'assets/bemvindo.mp4',
+    );
 
     _initializeVideoPlayer();
   }
 
   void _initializeVideoPlayer() async {
-    _videoController = VideoPlayerController.asset(
-      'assets/bemvindo.mp4',
-    );
-
     await _videoController!.initialize();
     setState(() {}); // Atualiza o estado após a inicialização do vídeo
     _videoController!
