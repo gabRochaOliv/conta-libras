@@ -66,8 +66,65 @@ class _BalancoContabilPageState extends State<BalancoContabilPage>
   Widget build(BuildContext context) {
     _tabContents = [
       _buildVideoPlayerTab(),
-      const Center(child: Text('Conteúdo da Tab 2')),
-      const Center(child: Text('Conteúdo da Tab 3')),
+      const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              'CONCEITO: É uma demonstração contábil destinada a '
+              'evidenciar, qualitativa e quantitativamente, numa determinada '
+              'data, a posição patrimonial e financeira da entidade. O Balanço '
+              'é composto por contas do Ativo, Passivo e Patrimônio Líquido '
+              'da empresa.',
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              'EXEMPLO: '
+              'O contador registra todas as movimentações patrimoniais '
+              'da empresa (bens, direitos e obrigações) e as classifica em seus '
+              'respectivos grupos de contas.',
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ),
+        ],
+      ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              'Língua Brasileira de Sinais',
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Image.asset(
+            'assets/sinal-balanco.png',
+            height: 200,
+            width: 400,
+          ),
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              'Representação Visual',
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Image.asset(
+            'assets/tabela-balanco.png',
+            height: 200,
+            width: 400,
+          ),
+        ],
+      ),
     ];
     return Scaffold(
       appBar: AppBar(
