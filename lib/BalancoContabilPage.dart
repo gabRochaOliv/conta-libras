@@ -45,7 +45,7 @@ class _BalancoContabilPageState extends State<BalancoContabilPage>
         ),
       );
     } else {
-      return const Center(child: CircularProgressIndicator());
+      return const CircularProgressIndicator();
     }
   }
 
@@ -66,7 +66,7 @@ class _BalancoContabilPageState extends State<BalancoContabilPage>
   Widget build(BuildContext context) {
     _tabContents = [
       _buildVideoPlayerTab(),
-      const Column(
+      Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -90,6 +90,40 @@ class _BalancoContabilPageState extends State<BalancoContabilPage>
               'respectivos grupos de contas.',
               textAlign: TextAlign.justify,
               style: TextStyle(fontSize: 20.0),
+            ),
+          ),
+          SizedBox(height: 20), // Espaçamento entre o texto e o botão
+          Center(
+            child: SizedBox(
+              width: 250, // Largura desejada para o botão
+              height: 50, // Altura desejada para o botão
+              child: ElevatedButton(
+                onPressed: () {
+                  // Abre o diálogo com o vídeo de Libras
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        contentPadding: EdgeInsets.zero,
+                        content: SizedBox.fromSize(
+                          child: FittedBox(
+                            fit: BoxFit.cover,
+                            child: SizedBox(
+                              width: _videoController.value.size.width,
+                              height: _videoController.value.size.height,
+                              child: VideoPlayer(_videoController),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Text(
+                  'Tradução em Libras',
+                  style: TextStyle(fontSize: 15), // Tamanho do texto
+                ),
+              ),
             ),
           ),
         ],
@@ -126,6 +160,7 @@ class _BalancoContabilPageState extends State<BalancoContabilPage>
         ],
       ),
     ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Balanço Contábil'),
@@ -139,7 +174,7 @@ class _BalancoContabilPageState extends State<BalancoContabilPage>
               child: TabBar(
                 controller: _tabController,
                 isScrollable: false,
-                tabs: const [
+                tabs: [
                   Tab(
                     child: Text(
                       'Sinal',
