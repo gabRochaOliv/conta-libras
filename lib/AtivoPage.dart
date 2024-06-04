@@ -12,63 +12,45 @@ class _AtivoPageState extends State<AtivoPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late List<Widget> _tabContents;
+  late VideoPlayerController _videoController;
 
-  VideoPlayerController? _videoController;
-  Future<void>? _initializeVideoPlayerFuture;
+  int _selectedTabIndex = 0;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabSelection);
-    _tabContents = [
-      _buildVideoPlayerTab(), // Aqui você insere o widget do vídeo na aba 'Sinal'
-      Center(child: Text('Conteúdo da Tab 2')),
-      Center(child: Text('Conteúdo da Tab 3')),
-    ];
-
-    _initializeVideoPlayer();
-  }
-
-  void _initializeVideoPlayer() {
     _videoController = VideoPlayerController.asset(
       'assets/bemvindo.mp4',
     );
 
-    _initializeVideoPlayerFuture = _videoController?.initialize();
-    _initializeVideoPlayerFuture?.whenComplete(() {
-      if (mounted) {
-        setState(() {}); // Atualiza o estado após a inicialização do vídeo
-        _videoController
-            ?.play(); // Inicia a reprodução do vídeo após a inicialização
-        _videoController?.setLooping(true); // Define a reprodução em loop
-      }
-    });
+    _initializeVideoPlayer();
+  }
+
+  Future<void> _initializeVideoPlayer() async {
+    await _videoController.initialize();
+    setState(() {}); // Atualiza o estado após a inicialização do vídeo
+    await _videoController
+        .play(); // Inicia a reprodução do vídeo após a inicialização
+    await _videoController.setLooping(true); // Define a reprodução em loop
   }
 
   Widget _buildVideoPlayerTab() {
-    return FutureBuilder(
-      future: _initializeVideoPlayerFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Center(
-            child: AspectRatio(
-              aspectRatio: _videoController?.value.aspectRatio ?? 16 / 9,
-              child: VideoPlayer(_videoController ??
-                  VideoPlayerController.asset(
-                      '')), // fallback video player if _videoController is null
-            ),
-          );
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      },
-    );
+    if (_videoController.value.isInitialized) {
+      return Center(
+        child: AspectRatio(
+          aspectRatio: _videoController.value.aspectRatio,
+          child: VideoPlayer(_videoController),
+        ),
+      );
+    } else {
+      return const CircularProgressIndicator();
+    }
   }
 
   void _handleTabSelection() {
     setState(() {
-      // Atualiza o índice da aba selecionada
       _selectedTabIndex = _tabController.index;
     });
   }
@@ -76,23 +58,118 @@ class _AtivoPageState extends State<AtivoPage>
   @override
   void dispose() {
     _tabController.dispose();
-    _videoController?.dispose();
+    _videoController.dispose();
     super.dispose();
   }
 
-  int _selectedTabIndex = 0; // Índice da aba selecionada
-
   @override
   Widget build(BuildContext context) {
+    _tabContents = [
+      _buildVideoPlayerTab(),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              'CONCEITO: É uma demonstração contábil destinada a '
+              'evidenciar, qualitativa e quantitativamente, numa determinada '
+              'data, a posição patrimonial e financeira da entidade. O Balanço '
+              'é composto por contas do Ativo, Passivo e Patrimônio Líquido '
+              'da empresa.',
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              'EXEMPLO: '
+              'O contador registra todas as movimentações patrimoniais '
+              'da empresa (bens, direitos e obrigações) e as classifica em seus '
+              'respectivos grupos de contas.',
+              textAlign: TextAlign.justify,
+              style: TextStyle(fontSize: 20.0),
+            ),
+          ),
+          SizedBox(height: 20), // Espaçamento entre o texto e o botão
+          Center(
+            child: SizedBox(
+              width: 250, // Largura desejada para o botão
+              height: 50, // Altura desejada para o botão
+              child: ElevatedButton(
+                onPressed: () {
+                  // Abre o diálogo com o vídeo de Libras
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        contentPadding: EdgeInsets.zero,
+                        content: SizedBox.fromSize(
+                          child: FittedBox(
+                            fit: BoxFit.cover,
+                            child: SizedBox(
+                              width: _videoController.value.size.width,
+                              height: _videoController.value.size.height,
+                              child: VideoPlayer(_videoController),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Text(
+                  'Tradução em Libras',
+                  style: TextStyle(fontSize: 15), // Tamanho do texto
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              'Língua Brasileira de Sinais',
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Image.asset(
+            'assets/sinal-balanco.png',
+            height: 200,
+            width: 400,
+          ),
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(
+              'Representação Visual',
+              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Image.asset(
+            'assets/tabela-balanco.png',
+            height: 200,
+            width: 400,
+          ),
+        ],
+      ),
+    ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ativo'),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor ??
             const Color.fromRGBO(33, 150, 243, 1),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
+          preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Container(
-            color: Color.fromARGB(255, 244, 243, 243),
+            color: const Color.fromARGB(255, 244, 243, 243),
             child: Center(
               child: TabBar(
                 controller: _tabController,
@@ -117,10 +194,10 @@ class _AtivoPageState extends State<AtivoPage>
                     ),
                   ),
                 ],
-                labelStyle: TextStyle(
+                labelStyle: const TextStyle(
                   fontSize: 18,
                 ),
-                labelPadding: EdgeInsets.symmetric(
+                labelPadding: const EdgeInsets.symmetric(
                   horizontal: 15,
                 ),
               ),

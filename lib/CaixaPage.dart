@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class AplicacaoFinanceiraPage extends StatefulWidget {
-  const AplicacaoFinanceiraPage({Key? key}) : super(key: key);
+class CaixaPage extends StatefulWidget {
+  const CaixaPage({Key? key}) : super(key: key);
 
   @override
-  State<AplicacaoFinanceiraPage> createState() => _AplicacaoFinanceiraPageState();
+  State<CaixaPage> createState() => _CaixaPageState();
 }
 
-class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
+class _CaixaPageState extends State<CaixaPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late List<Widget> _tabContents;
@@ -163,7 +163,7 @@ class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Aplicação Financeira'),
+        title: const Text('Caixa'),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor ??
             const Color.fromRGBO(33, 150, 243, 1),
         bottom: PreferredSize(

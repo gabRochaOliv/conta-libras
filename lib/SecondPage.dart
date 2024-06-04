@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'AtivoPage.dart';
 import 'AplicacaoFinanceiraPage.dart';
-import 'BalancoContabilPage.dart'; // Importe a página do Balanço Contábil
+import 'BalancoContabilPage.dart';
+import 'BensPage.dart';
+import 'CaixaPage.dart';
 
 class SecondPage extends StatefulWidget {
   const SecondPage({Key? key}) : super(key: key);
@@ -103,14 +105,6 @@ class _SecondPageState extends State<SecondPage> {
             Navigator.pop(context);
           },
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.star),
-            onPressed: () {
-              // Adicione aqui a lógica para lidar com a ação do botão de estrela
-            },
-          ),
-        ],
       ),
       body: Column(
         children: <Widget>[
@@ -206,6 +200,20 @@ class _SecondPageState extends State<SecondPage> {
                                     const BalancoContabilPage(),
                               ),
                             );
+                          } else if (filteredTerms[index] == 'Bens') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const BensPage(),
+                              ),
+                            );
+                          } else if (filteredTerms[index] == 'Caixa') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const CaixaPage(),
+                              ),
+                            );
                           }
                         },
                       ),
@@ -245,6 +253,20 @@ class _SecondPageState extends State<SecondPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => const BalancoContabilPage(),
+                          ),
+                        );
+                      } else if (filteredTerms[index] == 'Bens') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BensPage(),
+                          ),
+                        );
+                      } else if (filteredTerms[index] == 'Caixa') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CaixaPage(),
                           ),
                         );
                       }
