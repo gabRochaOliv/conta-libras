@@ -5,7 +5,8 @@ class AplicacaoFinanceiraPage extends StatefulWidget {
   const AplicacaoFinanceiraPage({Key? key}) : super(key: key);
 
   @override
-  State<AplicacaoFinanceiraPage> createState() => _AplicacaoFinanceiraPageState();
+  State<AplicacaoFinanceiraPage> createState() =>
+      _AplicacaoFinanceiraPageState();
 }
 
 class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
@@ -90,40 +91,6 @@ class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
               'respectivos grupos de contas.',
               textAlign: TextAlign.justify,
               style: TextStyle(fontSize: 20.0),
-            ),
-          ),
-          SizedBox(height: 20), // Espaçamento entre o texto e o botão
-          Center(
-            child: SizedBox(
-              width: 250, // Largura desejada para o botão
-              height: 50, // Altura desejada para o botão
-              child: ElevatedButton(
-                onPressed: () {
-                  // Abre o diálogo com o vídeo de Libras
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        contentPadding: EdgeInsets.zero,
-                        content: SizedBox.fromSize(
-                          child: FittedBox(
-                            fit: BoxFit.cover,
-                            child: SizedBox(
-                              width: _videoController.value.size.width,
-                              height: _videoController.value.size.height,
-                              child: VideoPlayer(_videoController),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-                child: Text(
-                  'Tradução em Libras',
-                  style: TextStyle(fontSize: 15), // Tamanho do texto
-                ),
-              ),
             ),
           ),
         ],
