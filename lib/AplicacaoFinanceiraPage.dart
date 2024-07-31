@@ -23,7 +23,7 @@ class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabSelection);
     _videoController = VideoPlayerController.asset(
-      'assets/bemvindo.mp4',
+      'aplicacao-financeira.mp4',
     );
 
     _initializeVideoPlayer();

@@ -22,7 +22,7 @@ class _CaixaPageState extends State<CaixaPage>
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabSelection);
     _videoController = VideoPlayerController.asset(
-      'assets/bemvindo.mp4',
+      'assets/Caixa.mp4',
     );
 
     _initializeVideoPlayer();
@@ -39,9 +39,12 @@ class _CaixaPageState extends State<CaixaPage>
   Widget _buildVideoPlayerTab() {
     if (_videoController.value.isInitialized) {
       return Center(
-        child: AspectRatio(
-          aspectRatio: _videoController.value.aspectRatio,
-          child: VideoPlayer(_videoController),
+        child: Container(
+          height: 550, // Defina a altura desejada aqui
+          child: AspectRatio(
+            aspectRatio: _videoController.value.aspectRatio,
+            child: VideoPlayer(_videoController),
+          ),
         ),
       );
     } else {
