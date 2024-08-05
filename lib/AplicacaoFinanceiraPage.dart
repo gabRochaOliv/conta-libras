@@ -23,7 +23,7 @@ class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
     _tabController = TabController(length: 3, vsync: this);
     _tabController.addListener(_handleTabSelection);
     _videoController = VideoPlayerController.asset(
-      'aplicacao-financeira.mp4',
+      'assets/VideosTermos/aplicacao-financeira.mp4',
     );
 
     _initializeVideoPlayer();
@@ -67,33 +67,89 @@ class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
   Widget build(BuildContext context) {
     _tabContents = [
       _buildVideoPlayerTab(),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-              'CONCEITO: É uma demonstração contábil destinada a '
-              'evidenciar, qualitativa e quantitativamente, numa determinada '
-              'data, a posição patrimonial e financeira da entidade. O Balanço '
-              'é composto por contas do Ativo, Passivo e Patrimônio Líquido '
-              'da empresa.',
-              textAlign: TextAlign.justify,
-              style: TextStyle(fontSize: 20.0),
+      SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'CONCEITO: ',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'É uma variedade de investimento com rentabilidade fixa ou variável com objetivo de obter lucros em um determinado período. O valor dessa aplicação classifica-se no Ativo Circulante. Caso o seu prazo de resgate venha ser superior aos 12 meses da aplicação, deve ser contabilizado no realizável a longo prazo.',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.justify,
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-              'EXEMPLO: '
-              'O contador registra todas as movimentações patrimoniais '
-              'da empresa (bens, direitos e obrigações) e as classifica em seus '
-              'respectivos grupos de contas.',
-              textAlign: TextAlign.justify,
-              style: TextStyle(fontSize: 20.0),
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'EXEMPLO: ',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'Aplicação financeira de R\$5.000,00 em Fundos de Investimentos Financeiros (FIF) no Banco JAM. Respectivos grupos de contas.\n',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'Débito: Aplicação Financeira - Disponibilidades (Ativo Circulante)\n ',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Crédito: ',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'Banco JAM c. Movimento - Disponibilidades (Ativo Circulante)',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.justify,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +163,7 @@ class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
             ),
           ),
           Image.asset(
-            'assets/sinal-balanco.png',
+            'assets/ImagensTermos/Aplicacao-Financeira.png',
             height: 200,
             width: 400,
           ),
@@ -120,7 +176,7 @@ class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
             ),
           ),
           Image.asset(
-            'assets/tabela-balanco.png',
+            'assets/ImagensTermos/Aplicacao-Financeira2.png',
             height: 200,
             width: 400,
           ),
@@ -144,7 +200,7 @@ class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
                 tabs: [
                   Tab(
                     child: Text(
-                      'Sinal',
+                      'Libras',
                       textAlign: TextAlign.center,
                     ),
                   ),
