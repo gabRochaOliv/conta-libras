@@ -66,33 +66,64 @@ class _BensPageState extends State<BensPage>
   Widget build(BuildContext context) {
     _tabContents = [
       _buildVideoPlayerTab(),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-              'CONCEITO: É uma demonstração contábil destinada a '
-              'evidenciar, qualitativa e quantitativamente, numa determinada '
-              'data, a posição patrimonial e financeira da entidade. O Balanço '
-              'é composto por contas do Ativo, Passivo e Patrimônio Líquido '
-              'da empresa.',
-              textAlign: TextAlign.justify,
-              style: TextStyle(fontSize: 20.0),
+      SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'CONCEITO: ',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'São as coisas capazes de satisfazer às necessidades das pessoas e das empresas, suscetíveis de avaliação econômica. Podem ser tangíveis ou intangíveis, podendo ser classificados como móveis ou imóveis.',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.justify,
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-              'EXEMPLO: '
-              'O contador registra todas as movimentações patrimoniais '
-              'da empresa (bens, direitos e obrigações) e as classifica em seus '
-              'respectivos grupos de contas.',
-              textAlign: TextAlign.justify,
-              style: TextStyle(fontSize: 20.0),
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'EXEMPLO: ',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'Por meio de levantamentos, foram identificado alguns BENS da empresa AMG, como: Dinheiro; Marca da Empresa; Ponto Comercial; Veículos; Móveis e Utensílios; Máquinas e Equipamentos.',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.justify,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       Column(
         mainAxisAlignment: MainAxisAlignment.center,

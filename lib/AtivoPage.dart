@@ -66,33 +66,113 @@ class _AtivoPageState extends State<AtivoPage>
   Widget build(BuildContext context) {
     _tabContents = [
       _buildVideoPlayerTab(),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-              'CONCEITO: É uma demonstração contábil destinada a '
-              'evidenciar, qualitativa e quantitativamente, numa determinada '
-              'data, a posição patrimonial e financeira da entidade. O Balanço '
-              'é composto por contas do Ativo, Passivo e Patrimônio Líquido '
-              'da empresa.',
-              textAlign: TextAlign.justify,
-              style: TextStyle(fontSize: 20.0),
+      SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'CONCEITO: ',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'Ativo é um recurso econômico presente controlado pela entidade como resultado de eventos passados e a geração de benefício econômico futuro.',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.justify,
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Text(
-              'EXEMPLO: '
-              'O contador registra todas as movimentações patrimoniais '
-              'da empresa (bens, direitos e obrigações) e as classifica em seus '
-              'respectivos grupos de contas.',
-              textAlign: TextAlign.justify,
-              style: TextStyle(fontSize: 20.0),
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'EXEMPLO: ',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'Tomando o encerramento do exercício social em 31 de dezembro de X1, o balanço patrimonial terá em seu ativo: \n',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          '\nAtivo Circulante \n\nAtivo não Circulante \n\n Ativo Realizável a Longo Prazo:  ',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'Bens e Direitos da mesma natureza das do ativo não circulante, porém realizáveisapós 31.12.X2. \n',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '\nInvestimento: ',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'Participações em outras empresas, de caráter permanente.\n',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text: '\nImobilizado: ',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                      text:
+                          'Bens e direitos necessários à manutenção da atividade da empresa e que sejam tangíveis, como máquinas,edifícios, computadores etc.',
+                      style: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.justify,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -106,7 +186,7 @@ class _AtivoPageState extends State<AtivoPage>
             ),
           ),
           Image.asset(
-            'assets/sinal-balanco.png',
+            'assets/ImagensTermos/Ativo.png',
             height: 200,
             width: 400,
           ),
@@ -119,7 +199,7 @@ class _AtivoPageState extends State<AtivoPage>
             ),
           ),
           Image.asset(
-            'assets/tabela-balanco.png',
+            'assets/ImagensTermos/Ativo2.png',
             height: 200,
             width: 400,
           ),
