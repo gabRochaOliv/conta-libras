@@ -163,7 +163,7 @@ class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
             ),
           ),
           Image.asset(
-            'assets/ImagensTermos/Aplicacao-Financeira.png',
+            'assets/ImagensTermos/aplicacaofin1e2.png',
             height: 200,
             width: 400,
           ),
@@ -176,7 +176,7 @@ class _AplicacaoFinanceiraPageState extends State<AplicacaoFinanceiraPage>
             ),
           ),
           Image.asset(
-            'assets/ImagensTermos/Aplicacao-Financeira2.png',
+            'assets/ImagensTermos/aplicacaofin3.jpg',
             height: 200,
             width: 400,
           ),

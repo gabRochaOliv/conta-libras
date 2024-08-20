@@ -186,7 +186,7 @@ class _AtivoPageState extends State<AtivoPage>
             ),
           ),
           Image.asset(
-            'assets/ImagensTermos/Ativo.png',
+            'assets/ImagensTermos/ativo1.png',
             height: 200,
             width: 400,
           ),
@@ -199,7 +199,7 @@ class _AtivoPageState extends State<AtivoPage>
             ),
           ),
           Image.asset(
-            'assets/ImagensTermos/Ativo2.png',
+            'assets/ImagensTermos/ativo2.jpg',
             height: 200,
             width: 400,
           ),
